@@ -27,19 +27,11 @@ export default class App extends Component {
     this.state = { deck: generateDeck(), pickedCards: []}
   }
   pickCard(cardIndex) {
-    // console.log('this.state.deck')
-    // console.log(this.state.deck)
     if (this.state.deck[cardIndex].isFlipped) {
       return
     }
     const cardToFlip = {...this.state.deck[cardIndex]}
-    // console.log('cardToFlip')
-    // console.log(cardToFlip)
-    // console.log(`cardToFlip after flip`)
-    // console.log(cardToFlip)
     let newPickedCards = this.state.pickedCards.concat(cardIndex)
-    // console.log(`newPickedCards:`)
-    // console.log(newPickedCards)
     const newDeck = this.state.deck.map((card, index) => {
       if (cardIndex === index) {
         cardToFlip.isFlipped = true
@@ -49,13 +41,10 @@ export default class App extends Component {
     })
     console.log(`new deck: `)
     console.log(newDeck)
-    // console.log('newPickedCards')
-    // console.log(newPickedCards)
     if (newPickedCards.length === 2) {
       const card1Index = newPickedCards[0]
       const card2Index = newPickedCards[1]
       if (newDeck[card1Index].symbol !== newDeck[card2Index].symbol) {
-        // console.log("they don't match")
         setTimeout(this.unflipCards.bind(this, card1Index, card2Index), 1000)
       }
       newPickedCards = []
@@ -78,17 +67,6 @@ export default class App extends Component {
       console.log(newDeck)
     })
   }
-
-  // unflipCards = (card1Index, card2Index) => {
-  //   let newDeck = this.state.deck.map((card, index) => {
-  //     if(index === card1Index || index === card2Index){
-  //       card.isFlipped = false;
-  //     }
-  //     return card;
-  //   });
-  //   this.setState({deck: newDeck});
-  // }
-
 
   render() {
     let cardsJSX = this.state.deck.map((card, index) => {
